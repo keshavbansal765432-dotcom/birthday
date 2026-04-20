@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    background: #1a1a1a;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.screen {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hidden { display: none; }
+
+.btn-group button {
+    background: #ff4757;
+    border: none;
+    padding: 20px 40px;
+    margin: 10px;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-group button:hover { background: #ff6b81; transform: scale(1.05); }
+
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #444;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.photo-frame {
+    width: 300px;
+    height: 300px;
+    border: 5px solid white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+    to { transform: translateY(100vh) rotate(360deg); }
+}

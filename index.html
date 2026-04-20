@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Surprise</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <div id="main-menu" class="screen">
+            <h1>Choose Your Path</h1>
+            <div class="btn-group">
+                <button onclick="loadSection('family')">Family Version</button>
+                <button onclick="loadSection('brothers')">Brothers Version</button>
+            </div>
+        </div>
+
+        <div id="brothers-menu" class="screen hidden">
+            <button class="back-btn" onclick="showMain()">← Back</button>
+            <h1>The Bro Zone</h1>
+            <div class="btn-group">
+                <button onclick="loadSection('bro_og')">The OG Version</button>
+                <button onclick="loadSection('bro_lyrics')">Lyrics & BGM</button>
+                <button onclick="loadSection('bro_fun')">The "Debt" Button</button>
+            </div>
+        </div>
+
+        <div id="display-screen" class="screen hidden">
+            <button class="back-btn" id="dynamic-back">← Back</button>
+            <div id="content-render"></div>
+        </div>
+    </div>
+
+    <script>
+        function hideAll() {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            // Stop any playing audio when switching
+            const audios = document.querySelectorAll('audio');
+            audios.forEach(a => { a.pause(); a.currentTime = 0; });
+        }
+
+        function showMain() {
+            hideAll();
+            document.getElementById('main-menu').classList.remove('hidden');
+        }
+
+        function loadSection(type) {
+            hideAll();
+            const display = document.getElementById('display-screen');
+            const render = document.getElementById('content-render');
+            const backBtn = document.getElementById('dynamic-back');
+            display.classList.remove('hidden');
+
+            if (type === 'family') {
+                backBtn.onclick = showMain;
+                loadFamily(render);
+            } else if (type === 'brothers') {
+                document.getElementById('brothers-menu').classList.remove('hidden');
+                display.classList.add('hidden');
+            } else if (type === 'bro_og') {
+                backBtn.onclick = () => loadSection('brothers');
+                loadBrothersOG(render);
+            } else if (type === 'bro_lyrics') {
+                backBtn.onclick = () => loadSection('brothers');
+                loadBrothersLyrics(render);
+            } else if (type === 'bro_fun') {
+                backBtn.onclick = () => loadSection('brothers');
+                loadBrothersFun(render);
+            }
+        }
+    </script>
+
+    <script src="family/family.js"></script>
+    <script src="brothers_og/og.js"></script>
+    <script src="brothers_lyrics/lyrics.js"></script>
+    <script src="brothers_fun/fun.js"></script>
+</body>
+</html>
